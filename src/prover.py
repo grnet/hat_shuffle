@@ -42,9 +42,9 @@ def step2(gk, A, B, g1_sum, g2_sum):
     return A, B
 
 
-def step3(gk, A_hat, g1_sum):
+def step3(gk, A_hat, g1_hat_sum):
     inf1, inf2 = get_infs(gk)
-    A_hat.append(g1_sum - sum(A_hat, inf1))
+    A_hat.append(g1_hat_sum - sum(A_hat, inf1))
     return A_hat
 
 
@@ -85,7 +85,7 @@ def step7(gk, sigma, t_randoms, pk, ciphertexts):
     _, inf2 = get_infs(gk)
     M_primes = []
     for perm_i, t_random in zip(sigma, t_randoms):
-        M_primes.append(ciphertexts[perm_i] + enc(pk, t_random, 0))
+        M_primes.append(tuple_add(ciphertexts[perm_i], enc(pk, t_random, 0)))
     return M_primes
 
 
@@ -128,7 +128,7 @@ def prove(n, crs, ciphertexts, sigma, t_randoms):
         crs.g1_polys, crs.crs_con.g1_poly_hats,
         crs.g2_polys, crs.g2rho, crs.crs_con.g1rhohat)
     A, B = step2(crs.gk, A, B, crs.crs_1sp.g1_sum, crs.crs_1sp.g2_sum)
-    A_hat = step3(crs.gk, A_hat, crs.crs_1sp.g1_sum)
+    A_hat = step3(crs.gk, A_hat, crs.crs_1sp.g1_hat_sum)
     randoms = step4(crs.gk, randoms)
     C = step5a(randoms, A, g1_randoms, sigma,
                crs.crs_1sp.g1_poly_zero, crs.crs_1sp.g1_poly_squares)
