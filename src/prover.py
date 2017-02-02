@@ -75,9 +75,9 @@ def step5b(sigma, randoms, g1_beta_polys, g1_beta_rhos):
 def step6(gk, t_randoms, g1_poly_hats, g1rhohat):
     rt = gk.q.random()
     inf1, _ = get_infs(gk)
-    g1_t = inf1
+    g1_t = rt * g1rhohat
     for t_random, g1_poly_hat in zip(t_randoms, g1_poly_hats):
-        g1_t += t_random * g1_poly_hat + rt * g1rhohat
+        g1_t += t_random * g1_poly_hat
     return rt, g1_t
 
 
