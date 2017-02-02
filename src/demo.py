@@ -44,7 +44,7 @@ def demo(n, messages):
     t_randoms = mk_t_randoms(n, gk.q)
     pi_sh = prover.prove(n, CRS, ciphertexts, sigma, t_randoms)
     shuffled_ciphertexts, A, pi_1sp, pi_sm, pi_con = pi_sh
-    perm_ok, sm_ok, cons_ok = verifier_nb.verify_batched(CRS, ciphertexts, pi_sh)
+    perm_ok, sm_ok, cons_ok = verifier_nb.verify(CRS, ciphertexts, pi_sh)
     print("VERIFY: %s %s %s" % (perm_ok, sm_ok, cons_ok))
     end = datetime.datetime.now()
 
