@@ -120,7 +120,7 @@ def generate_pis(chi, n, q):
         
     return pis
 
-def generate_hpis(chi, n, q):
+def generate_pi_hats(chi, n, q):
     """Computes vector of elements \hat{P}_i(chi) for i = 1, ..., n.
 
     These are simply the polynomials x^{(i+1)(n+1)}.    
@@ -142,12 +142,12 @@ def test_generate_pis():
     assert(generate_pis(Bn(8), 3, Bn(17)) == [0, 12, 5, 3])
     assert(generate_pis(Bn(9), 4, Bn(17)) == [1, 4, 5, 1, 13])
 
-def test_generate_hpis():
-    assert(generate_hpis(Bn(6), 3, Bn(997)) == [668, 332, 565])
-    assert(generate_hpis(Bn(6), 5, Bn(997)) == [332, 400, 554, 199, 480])
-    assert(generate_hpis(Bn(17), 7, Bn(313)) == [16, 249, 256, 228, 27,
+def test_generate_pi_hats():
+    assert(generate_pi_hats(Bn(6), 3, Bn(997)) == [668, 332, 565])
+    assert(generate_pi_hats(Bn(6), 5, Bn(997)) == [332, 400, 554, 199, 480])
+    assert(generate_pi_hats(Bn(17), 7, Bn(313)) == [16, 249, 256, 228, 27,
                                                  205, 119])
     
 if __name__ == '__main__':
     test_generate_pis()
-    test_generate_hpis()
+    test_generate_pi_hats()
