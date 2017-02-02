@@ -12,10 +12,8 @@ def key_gen(params):
     pub = (g, priv * g)
     return (pub, priv)
     
-def enc(pub, m):
+def enc(pub, r, m):
     pk1, pk2 = pub
-    o = pk1.group.order()
-    r = o.random()
     a = r * pk1
     b = m * pk1 + r * pk2
     return (a, b)
@@ -40,7 +38,8 @@ def test_encdec(params):
     import random
     ps = random.sample(range(1000), 100)
     for i in range(100):
-        c = enc(pub, ps[i])
+        r = o.random()
+        c = enc(pub, r, ps[i])
         assert(dec(priv, c, table) == ps[i])
 
 if __name__ == '__main__':

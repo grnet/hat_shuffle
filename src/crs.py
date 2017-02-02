@@ -58,7 +58,7 @@ def mk_crs_1sp(gk, Chi, polys, poly_zero, poly_hats):
     g1_poly_squares = []
     for poly in polys:
         numer = (poly + poly_zero) ** 2 - 1
-        g1_poly_squares.append(numer * inv_rho) * gk.g1
+        g1_poly_squares.append((numer * inv_rho) * gk.g1)
     g1_sum = poly_sum * gk.g1
     g1_hat_sum = poly_hat_sum * gk.g1
 

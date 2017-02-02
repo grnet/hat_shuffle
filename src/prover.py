@@ -44,7 +44,7 @@ def step2(gk, A, B, g1_sum, g2_sum):
 
 def step3(gk, A_hat, g1_sum):
     inf1, inf2 = get_infs(gk)
-    A_hat.append(g1_sum, - sum(A_hat, inf1))
+    A_hat.append(g1_sum - sum(A_hat, inf1))
     return A_hat
 
 
@@ -89,10 +89,19 @@ def step7(gk, sigma, t_randoms, pk, ciphertexts):
     return M_primes
 
 
+def tuple_map(func, tpl):
+    return tuple(map(func, tpl))
+
+
+def tuple_add(tpl1, tpl2):
+    zipped = zip(tpl1, tpl2)
+    return tuple(z[0] + z[1] for z in zipped)
+
+
 def step8(pk, rt, randoms, ciphertexts):
-    N = rt * pk
+    N = tuple_map(lambda elem: rt * elem, pk)
     for random, ciphertext in zip(randoms, ciphertexts):
-        N += random * ciphertext
+        N = tuple_add(N, tuple_map(lambda elem: random * elem, ciphertext))
     return N
 
 
@@ -122,7 +131,7 @@ def prove(n, crs, ciphertexts, sigma, t_randoms):
     A_hat = step3(crs.gk, A_hat, crs.crs_1sp.g1_sum)
     randoms = step4(crs.gk, randoms)
     C = step5a(randoms, A, g1_randoms, sigma,
-               crs.crs_1sp,g1_poly_zero, crs.crs_1sp.g1_poly_squares)
+               crs.crs_1sp.g1_poly_zero, crs.crs_1sp.g1_poly_squares)
     D = step5b(
         sigma, randoms, crs.crs_sm.g1_beta_polys, crs.crs_sm.g1_beta_rhos)
     rt, g1_t = step6(
