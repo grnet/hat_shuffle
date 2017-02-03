@@ -6,16 +6,17 @@ from sympy.abc import x
 from sympy.plotting import plot
 from sympy.printing import latex
 
+
 def genpis(n):
     polys = []
     # Make P_0
-    points = [ (i+1, -1) for i in range(n-1) ]
+    points = [(i+1, -1) for i in range(n-1)]
     points.append((n, 0))
     poly_i = poly(interpolate(points, x))
     polys.append(poly_i)
     # Make P_i
     for i in range(n-1):
-        points = [ ]
+        points = []
         for j in range(n-1):
             if i == j:
                 points.append((j+1, 2))
@@ -26,19 +27,21 @@ def genpis(n):
         polys.append(poly_i)
     return polys
 
+
 def genhpis(n):
     polys = []
     hpi = poly(x**(n+1))
-    polys = [ hpi**(i+1) for i in range(1, n+1)]
-        
+    polys = [hpi**(i+1) for i in range(1, n+1)]
     return polys
 
 
 def draw_poly(p):
     plot(p.as_expr())
 
+
 def eval_poly(p, x, m):
     return p.eval(x) % m
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", "--number", type=int, default=3,
