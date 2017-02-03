@@ -48,10 +48,11 @@ def step3(gk, A_hat, g1_hat_sum):
     return A_hat
 
 
-def step4(gk, randoms):
+def step4(gk, randoms, g1_randoms, g1rho):
     rand_n = - sum(randoms) % gk.q
     randoms.append(rand_n)
-    return randoms
+    g1_randoms.append(rand_n * g1rho)
+    return randoms, g1_randoms
 
 
 def step5a(randoms, A, g1_randoms, sigma, g1_poly_zero, g1_poly_squares):
@@ -129,7 +130,7 @@ def prove(n, crs, ciphertexts, sigma, t_randoms):
         crs.g2_polys, crs.g2rho, crs.crs_con.g1rhohat)
     A, B = step2(crs.gk, A, B, crs.crs_1sp.g1_sum, crs.crs_1sp.g2_sum)
     A_hat = step3(crs.gk, A_hat, crs.crs_1sp.g1_hat_sum)
-    randoms = step4(crs.gk, randoms)
+    randoms, g1_randoms = step4(crs.gk, randoms, g1_randoms, crs.g1rho)
     C = step5a(randoms, A, g1_randoms, sigma,
                crs.crs_1sp.g1_poly_zero, crs.crs_1sp.g1_poly_squares)
     D = step5b(
