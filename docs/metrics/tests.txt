@@ -1,0 +1,12 @@
+hat_shuffle 10: 0:00:00.533551
+hat_shuffle 100: 0:00:04.885646
+hat_shuffle 1000: 0:00:48.766354
+
+hat_shuffle 10: 0:00:00.210609
+hat_shuffle 100: 0:00:01.419004
+hat_shuffle 1000: 0:00:13.952182
+hat_shuffle 10000: 0:02:20.353210
+hat_shuffle 50000: 0:11:42.220968
+hat_shuffle 100000: 0:23:24.428650
+
+flz16 (libff) 10000: 0:04:02.763451
