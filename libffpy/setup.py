@@ -17,8 +17,8 @@ setup(
             sources=["libffpy.pyx", "libff_wrapper.cpp"],
             language="c++",
             include_dirs=["/usr/local/include/libff"],
-	    libraries=["zm"],
-            library_dirs = ["/usr/local/lib", "/home/user/ate-pairing/lib"],
+	        libraries=["zm"],
+            library_dirs = ["/usr/local/lib", "/path/to/ate-pairing/lib"],
             extra_compile_args = ["-std=c++11", "-fPIC", "-shared", "-w", "-static", "-O3"],
             extra_link_args = ["-lgmp", "-lff", "-lsnark", "-lcrypto", "-fopenmp", "-g"]
         )
