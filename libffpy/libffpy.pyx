@@ -430,7 +430,6 @@ cdef class G2Py:
         return self.createElem(newptr)
 
     cpdef eq(self, G2Py other):
-        print("OK")
         return self.getElemRef()[0] == other.getElemRef()[0]
 
     def __mul__(x, y):
