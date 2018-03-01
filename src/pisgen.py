@@ -138,9 +138,6 @@ def generate_pi_hats(chi, n, q):
 
 def test_generate_pis():
     a = generate_pis(BigNum(6), 2, BigNum(7))
-    for n in a:
-        print(n)
-    print("OK")
     assert(generate_pis(BigNum(6), 2, BigNum(7)) == [2, 1, 1])
     assert(generate_pis(BigNum(8), 3, BigNum(17)) == [0, 12, 5, 3])
     assert(generate_pis(BigNum(9), 4, BigNum(17)) == [1, 4, 5, 1, 13])
