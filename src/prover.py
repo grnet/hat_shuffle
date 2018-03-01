@@ -1,4 +1,4 @@
-from bplib.bp import G1Elem, G2Elem
+from libffpy import G1Py, G2Py
 from elgamal import enc
 
 
@@ -29,27 +29,28 @@ def step1b(sigma, randoms, g1_randoms,
     return A, B, A_hat
 
 
-def get_infs(gk):
-    inf1 = G1Elem.inf(gk.G)
-    inf2 = G2Elem.inf(gk.G)
+def get_infs():
+    inf1 = G1Py.inf()
+    inf2 = G2Py.inf()
     return inf1, inf2
 
 
 def step2(gk, A, B, g1_sum, g2_sum):
-    inf1, inf2 = get_infs(gk)
+    inf1, inf2 = get_infs()
+    print("The end")
     A.append(g1_sum - sum(A, inf1))
     B.append(g2_sum - sum(B, inf2))
     return A, B
 
 
 def step3(gk, A_hat, g1_hat_sum):
-    inf1, inf2 = get_infs(gk)
+    inf1, inf2 = get_infs()
     A_hat.append(g1_hat_sum - sum(A_hat, inf1))
     return A_hat
 
 
 def step4(gk, randoms, g1_randoms, g1rho):
-    rand_n = - sum(randoms) % gk.q
+    rand_n = - sum(randoms)
     randoms.append(rand_n)
     g1_randoms.append(rand_n * g1rho)
     return randoms, g1_randoms
@@ -75,7 +76,7 @@ def step5b(sigma, randoms, g1_beta_polys, g1_beta_rhos):
 
 def step6(gk, t_randoms, g1_poly_hats, g1rhohat):
     rt = gk.q.random()
-    inf1, _ = get_infs(gk)
+    inf1, _ = get_infs()
     g1_t = rt * g1rhohat
     for t_random, g1_poly_hat in zip(t_randoms, g1_poly_hats):
         g1_t += t_random * g1_poly_hat
@@ -83,7 +84,7 @@ def step6(gk, t_randoms, g1_poly_hats, g1rhohat):
 
 
 def step7(gk, sigma, t_randoms, pk, ciphertexts):
-    _, inf2 = get_infs(gk)
+    _, inf2 = get_infs()
     M_primes = []
     for perm_i, t_random in zip(sigma, t_randoms):
         M_primes.append(tuple_add(ciphertexts[perm_i], enc(pk, t_random, 0)))

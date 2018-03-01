@@ -1,4 +1,4 @@
-from bplib.bp import GTElem
+from libffpy import GTPy
 import prover
 from functools import reduce
 
@@ -19,7 +19,7 @@ def step2(gk, g1_a, g2_b, g1_hat_a, g1_sum, g2_sum, g1_hat_sum):
 
 
 def get_infT(gk):
-    return GTElem.one(gk.G)
+    return GTPy.one()
 
 
 def step3(gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
@@ -38,14 +38,14 @@ def step3(gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
 def step3_batched(n, gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
     y1 = [gk.q.random() for x in range(n - 1)] + [1]
     infT = get_infT(gk)
-    inf1, _ = prover.get_infs(gk)
+    inf1, _ = prover.get_infs()
 
     g1_alpha_poly_zero = crs_1sp.g1_alpha_poly_zero
     g2alpha = crs_1sp.g2alpha
     pair_alpha = crs_1sp.pair_alpha
 
     right = (gk.e(mexp(y1, g1_c, inf1), g2_rho) *
-             (pair_alpha ** (sum(y1) % gk.q)))
+             (pair_alpha ** sum(y1)))
     left = infT
     for yi, a, b in zip(y1, g1_a, g2_b):
         left *= gk.e(yi * (a + g1_alpha_poly_zero), b + g2alpha)
@@ -66,7 +66,7 @@ def step4(gk, g1_d, g1_a, g1_hat_a, crs_sm):
 
 def step4_batched(n, gk, g1_d, g1_a, g1_hat_a, crs_sm):
     y2 = [gk.q.random() for x in range(n - 1)] + [1]
-    inf1, _ = prover.get_infs(gk)
+    inf1, _ = prover.get_infs()
 
     g2_beta = crs_sm.g2_beta
     g2_beta_hat = crs_sm.g2_betahat
@@ -99,7 +99,7 @@ def mexp(scals, elems, inf):  # find optimized version in lib
 
 def step5_batched(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
     infT = get_infT(gk)
-    _, inf2 = prover.get_infs(gk)
+    _, inf2 = prover.get_infs()
     g1_hat_rho = crs_con.g1rhohat
     g1_poly_hats = crs_con.g1_poly_hats
     y3 = [gk.q.random(), 1]

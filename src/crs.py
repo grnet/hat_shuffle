@@ -1,4 +1,4 @@
-from bplib import bp
+from libffpy import LibffPy
 from collections import namedtuple
 from pisgen import generate_pis, generate_pi_hats
 
@@ -26,8 +26,8 @@ CRS_T = namedtuple(
               "crs_sm", "crs_1sp", "crs_con"])
 
 
-def mk_gk():
-    G = bp.BpGroup()
+def mk_gk(n):
+    G = LibffPy(n)
     q = G.order()
     g1 = G.gen1()
     g2 = G.gen2()
@@ -54,7 +54,7 @@ def mk_crs_1sp(gk, Chi, polys, poly_zero, poly_hats):
     # G1
     g1_alpha_poly_zero = (Chi.alpha + poly_zero) * gk.g1
     g1_poly_zero = poly_zero * gk.g1
-    inv_rho = Chi.rho.mod_inverse(gk.q)
+    inv_rho = Chi.rho.mod_inverse()
     g1_poly_squares = []
     for poly in polys:
         numer = (poly + poly_zero) ** 2 - 1
@@ -67,7 +67,7 @@ def mk_crs_1sp(gk, Chi, polys, poly_zero, poly_hats):
     g2_sum = poly_sum * gk.g2
 
     # GT
-    pair_alpha = gk.gt ** ((1 - Chi.alpha ** 2) % gk.q)
+    pair_alpha = gk.gt ** (1 - Chi.alpha ** 2)
 
     return CRS_1SP_T(g1_alpha_poly_zero, g1_poly_zero, g1_poly_squares,
                      g1_sum, g1_hat_sum,
@@ -98,7 +98,7 @@ def mk_crs_con(gk, Chi, poly_hats):
 
 
 def mk_crs(n, gk, Chi):
-    polys_all = generate_pis(Chi.chi, n, gk.q)
+    polys_all = generate_pis(Chi.chi, n)
     poly_zero = polys_all[0]
     polys = polys_all[1:]
     poly_hats = generate_pi_hats(Chi.chi, n, gk.q)

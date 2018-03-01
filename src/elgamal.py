@@ -1,8 +1,8 @@
-from bplib.bp import BpGroup
+from libffpy import LibffPy
 
 
-def gen_params_bp_g2(nid=713):
-    G = BpGroup()
+def gen_params_bp_g2(n):
+    G = LibffPy(n)
     g = G.gen2()
     o = G.order()
     return (G, g, o)
@@ -51,4 +51,4 @@ def test_encdec(params):
 
 if __name__ == '__main__':
     print("Testing BP group G2...")
-    test_encdec(gen_params_bp_g2())
+    test_encdec(gen_params_bp_g2(100))
