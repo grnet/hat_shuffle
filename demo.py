@@ -33,27 +33,54 @@ def mk_t_randoms(n, q):
 
 
 def demo(n, messages, batch=True):
+    start = datetime.datetime.now()
+
     gk, Chi, CRS = initialize(n)
+
+    time_init = datetime.datetime.now() - start
+    print("Initialization: %s" % time_init)
+    time_init = datetime.datetime.now()
+
     secret = Chi.sk
     pk = CRS.pk
     ciphertexts = encrypt_messages(gk.q, pk, messages)
 
-    start = datetime.datetime.now()
+    time_enc = datetime.datetime.now() - time_init
+    print("Encryption: %s" % time_enc)
+    time_enc = datetime.datetime.now()
+
     sigma = random_permutation(n)
-    print("SIGMA = %s" % sigma)
+
+    time_perm = datetime.datetime.now() - time_enc
+    print("Random Permutations: %s" % time_perm)
+    time_perm = datetime.datetime.now()
+
+    #  print("SIGMA = %s" % sigma)
     t_randoms = mk_t_randoms(n, gk.q)
     pi_sh = prover.prove(n, CRS, ciphertexts, sigma, t_randoms)
     shuffled_ciphertexts, A, pi_1sp, pi_sm, pi_con = pi_sh
+
+    time_proof = datetime.datetime.now() - time_perm
+    print("Proof: %s" % time_proof)
+    time_proof = datetime.datetime.now()
+
     verify = verifier.verify_batched if batch else verifier.verify_non_batched
     perm_ok, sm_ok, cons_ok = verify(n, CRS, ciphertexts, pi_sh)
-    print("VERIFY: %s %s %s" % (perm_ok, sm_ok, cons_ok))
-    end = datetime.datetime.now()
+    #  print("VERIFY: %s %s %s" % (perm_ok, sm_ok, cons_ok))
+
+    time_ver = datetime.datetime.now() - time_proof
+    print("Verification: %s" % time_ver)
+    time_ver = datetime.datetime.now()
 
     TABLE = encdec.make_table(pk, n)
     shuffled_ms = decrypt_messages(secret, TABLE, shuffled_ciphertexts)
-    print(shuffled_ms)
-    print("elapsed: %s" % (end - start))
 
+    time_dec = datetime.datetime.now() - time_ver
+    print("Decryption: %s" % time_dec)
+    #  print(shuffled_ms)
+
+    end = datetime.datetime.now() - start
+    print("Ellapsed: %s" % end)
 
 def encrypt_messages(order, pk, messages):
     return [encdec.encrypt(order, pk, message) for message in messages]
