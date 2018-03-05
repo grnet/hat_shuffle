@@ -1,0 +1,103 @@
+         23048 function calls in 6.073 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    6.073    6.073 <string>:1(<module>)
+        1    0.000    0.000    6.073    6.073 /home/user/hat_shuffle/src/prover.py:126(prove)
+     1002    0.004    0.000    2.335    0.002 {map}
+        1    0.004    0.004    1.818    1.818 /home/user/hat_shuffle/src/prover.py:103(step8)
+     1001    0.002    0.000    1.796    0.002 /home/user/hat_shuffle/src/prover.py:94(tuple_map)
+     2000    1.790    0.001    1.790    0.001 /home/user/hat_shuffle/src/prover.py:106(<lambda>)
+        1    1.324    1.324    1.327    1.327 /home/user/hat_shuffle/src/prover.py:18(step1b)
+        1    0.005    0.005    1.074    1.074 /home/user/hat_shuffle/src/prover.py:86(step7)
+     1000    1.048    0.001    1.048    0.001 /home/user/hat_shuffle/src/elgamal.py:18(enc)
+        1    0.002    0.002    0.577    0.577 /home/user/hat_shuffle/src/prover.py:12(step1a)
+      999    0.540    0.001    0.540    0.001 /home/user/hat_shuffle/src/prover.py:14(<lambda>)
+        1    0.427    0.427    0.428    0.428 /home/user/hat_shuffle/src/prover.py:59(step5a)
+        1    0.419    0.419    0.419    0.419 /home/user/hat_shuffle/src/prover.py:69(step5b)
+        1    0.417    0.417    0.418    0.418 /home/user/hat_shuffle/src/prover.py:77(step6)
+     2000    0.011    0.000    0.039    0.000 /home/user/hat_shuffle/src/prover.py:98(tuple_add)
+     1000    0.035    0.000    0.035    0.000 {method 'random' of 'libffpy.libffpy.BigNum' objects}
+     6000    0.025    0.000    0.025    0.000 /home/user/hat_shuffle/src/prover.py:100(<genexpr>)
+        4    0.011    0.003    0.011    0.003 {sum}
+        1    0.000    0.000    0.008    0.008 /home/user/hat_shuffle/src/prover.py:38(step2)
+     2006    0.004    0.000    0.004    0.000 {zip}
+     6002    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.002    0.002 /home/user/hat_shuffle/src/prover.py:46(step3)
+        2    0.001    0.001    0.001    0.001 /home/user/hat_shuffle/src/prover.py:104(<lambda>)
+        1    0.000    0.000    0.001    0.001 /home/user/hat_shuffle/src/prover.py:52(step4)
+        3    0.001    0.000    0.001    0.000 /home/user/hat_shuffle/src/prover.py:5(inverse_perm)
+        4    0.000    0.000    0.000    0.000 /home/user/hat_shuffle/src/prover.py:32(get_infs)
+        1    0.000    0.000    0.000    0.000 /home/user/hat_shuffle/src/prover.py:118(step11)
+        1    0.000    0.000    0.000    0.000 /home/user/hat_shuffle/src/prover.py:110(step9)
+        1    0.000    0.000    0.000    0.000 /home/user/hat_shuffle/src/prover.py:122(step12)
+        1    0.000    0.000    0.000    0.000 {range}
+        4    0.000    0.000    0.000    0.000 {libffpy.libffpy.inf}
+        3    0.000    0.000    0.000    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 /home/user/hat_shuffle/src/prover.py:114(step10)
+
+
+   Ordered by: cumulative time
+
+Function                                               was called by...
+                                                           ncalls  tottime  cumtime
+<string>:1(<module>)                                   <-
+/home/user/hat_shuffle/src/prover.py:126(prove)        <-       1    0.000    6.073  <string>:1(<module>)
+{map}                                                  <-       1    0.001    0.541  /home/user/hat_shuffle/src/prover.py:12(step1a)
+                                                             1001    0.003    1.794  /home/user/hat_shuffle/src/prover.py:94(tuple_map)
+/home/user/hat_shuffle/src/prover.py:103(step8)        <-       1    0.004    1.818  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:94(tuple_map)     <-    1001    0.002    1.796  /home/user/hat_shuffle/src/prover.py:103(step8)
+/home/user/hat_shuffle/src/prover.py:106(<lambda>)     <-    2000    1.790    1.790  {map}
+/home/user/hat_shuffle/src/prover.py:18(step1b)        <-       1    1.324    1.327  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:86(step7)         <-       1    0.005    1.074  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/elgamal.py:18(enc)          <-    1000    1.048    1.048  /home/user/hat_shuffle/src/prover.py:86(step7)
+/home/user/hat_shuffle/src/prover.py:12(step1a)        <-       1    0.002    0.577  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:14(<lambda>)      <-     999    0.540    0.540  {map}
+/home/user/hat_shuffle/src/prover.py:59(step5a)        <-       1    0.427    0.428  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:69(step5b)        <-       1    0.419    0.419  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:77(step6)         <-       1    0.417    0.418  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:98(tuple_add)     <-    1000    0.006    0.021  /home/user/hat_shuffle/src/prover.py:86(step7)
+                                                             1000    0.005    0.018  /home/user/hat_shuffle/src/prover.py:103(step8)
+{method 'random' of 'libffpy.libffpy.BigNum' objects}  <-     999    0.035    0.035  /home/user/hat_shuffle/src/prover.py:12(step1a)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:77(step6)
+/home/user/hat_shuffle/src/prover.py:100(<genexpr>)    <-    6000    0.025    0.025  /home/user/hat_shuffle/src/prover.py:98(tuple_add)
+{sum}                                                  <-       2    0.008    0.008  /home/user/hat_shuffle/src/prover.py:38(step2)
+                                                                1    0.002    0.002  /home/user/hat_shuffle/src/prover.py:46(step3)
+                                                                1    0.001    0.001  /home/user/hat_shuffle/src/prover.py:52(step4)
+/home/user/hat_shuffle/src/prover.py:38(step2)         <-       1    0.000    0.008  /home/user/hat_shuffle/src/prover.py:126(prove)
+{zip}                                                  <-       1    0.001    0.001  /home/user/hat_shuffle/src/prover.py:18(step1b)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:59(step5a)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:69(step5b)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:77(step6)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:86(step7)
+                                                             2000    0.003    0.003  /home/user/hat_shuffle/src/prover.py:98(tuple_add)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:103(step8)
+{method 'append' of 'list' objects}                    <-    2997    0.001    0.001  /home/user/hat_shuffle/src/prover.py:18(step1b)
+                                                                2    0.000    0.000  /home/user/hat_shuffle/src/prover.py:38(step2)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:46(step3)
+                                                                2    0.000    0.000  /home/user/hat_shuffle/src/prover.py:52(step4)
+                                                             1000    0.001    0.001  /home/user/hat_shuffle/src/prover.py:59(step5a)
+                                                             1000    0.001    0.001  /home/user/hat_shuffle/src/prover.py:69(step5b)
+                                                             1000    0.001    0.001  /home/user/hat_shuffle/src/prover.py:86(step7)
+/home/user/hat_shuffle/src/prover.py:46(step3)         <-       1    0.000    0.002  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:104(<lambda>)     <-       2    0.001    0.001  {map}
+/home/user/hat_shuffle/src/prover.py:52(step4)         <-       1    0.000    0.001  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:5(inverse_perm)   <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:18(step1b)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:59(step5a)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:69(step5b)
+/home/user/hat_shuffle/src/prover.py:32(get_infs)      <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:38(step2)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:46(step3)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:77(step6)
+                                                                1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:86(step7)
+/home/user/hat_shuffle/src/prover.py:118(step11)       <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:110(step9)        <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:126(prove)
+/home/user/hat_shuffle/src/prover.py:122(step12)       <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:126(prove)
+{range}                                                <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:12(step1a)
+{libffpy.libffpy.inf}                                  <-       4    0.000    0.000  /home/user/hat_shuffle/src/prover.py:32(get_infs)
+{len}                                                  <-       3    0.000    0.000  /home/user/hat_shuffle/src/prover.py:5(inverse_perm)
+{method 'disable' of '_lsprof.Profiler' objects}       <-
+/home/user/hat_shuffle/src/prover.py:114(step10)       <-       1    0.000    0.000  /home/user/hat_shuffle/src/prover.py:126(prove)
+
+
