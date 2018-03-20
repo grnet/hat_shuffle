@@ -77,3 +77,12 @@ To run it:
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libprocps.so
 python demo.py
 ```
+
+Docker
+======
+
+To run a docker container of libffpy:
+
+```
+docker run schaliasos/libffpy python hat_shuffle/libffpy/demo.py 100
+```

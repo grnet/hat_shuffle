@@ -14,10 +14,11 @@ RUN git clone https://github.com/scipr-lab/libsnark.git && cd libsnark && \
 WORKDIR $HOME
 
 # Install libff
-RUN apt-get install libboost-all-dev libgmp3-dev
-RUN git clone https://github.com/scipr-lab/libff.git &&  cd libff && git submodule init && \
-    git submodule update && mkdir build && cd build && cmake .. && make && \
-    make install && cp -R depends /usr/local/include/
+RUN apt-get install -y libboost-all-dev libgmp3-dev wget
+RUN git clone https://github.com/scipr-lab/libff.git && cd libff && git submodule init && \
+    git submodule update && rm CMakeLists.txt && wget stefanoshaliasos.com/CMakeLists.txt && \
+    mkdir build && cd build && cmake .. && make && \
+    make install && cd ../ && cp -R depends /usr/local/include/
 
 WORKDIR $HOME
 
@@ -27,9 +28,9 @@ RUN git clone git://github.com/herumi/xbyak.git && \
     make -j SUPPORT_SNARK=1
 
 WORKDIR $HOME
-RUN pwd
 
 # Install dependecies
-#RUN apt-get install python python-pip && pip install cython
-#RUN git clone git@github.com:grnet/hat_shuffle.git && cd hat_shuffle && \
-    # git checkout -b docker origin/docker && ./build
+RUN apt-get install -y python python-pip && pip install cython
+RUN git clone git://github.com/grnet/hat_shuffle.git && cd hat_shuffle && \
+    git fetch && git checkout docker && ./build.sh
+ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libprocps.so
