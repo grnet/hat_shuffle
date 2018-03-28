@@ -13,11 +13,18 @@ RUN git clone https://github.com/scipr-lab/libsnark.git && cd libsnark && \
 
 WORKDIR $HOME
 
+RUN git clone git://github.com/grnet/hat_shuffle.git && cd hat_shuffle \
+    && git fetch && git checkout docker
+
+WORKDIR $HOME
+
 # Install libff
-RUN apt-get install -y libboost-all-dev libgmp3-dev wget
+RUN apt-get install -y libboost-all-dev libgmp3-dev
 RUN git clone https://github.com/scipr-lab/libff.git && cd libff && git submodule init && \
-    git submodule update && rm CMakeLists.txt && wget stefanoshaliasos.com/CMakeLists.txt && \
-    mkdir build && cd build && cmake .. && make && \
+    git submodule update && rm CMakeLists.txt && cp ../hat_shuffle/CMakeLists.txt ./ \
+    && sed -i 's/bool inhibit_profiling_info = false;/bool inhibit_profiling_info = true;/g' libff/common/profiling.cpp \
+    && sed -i 's/bool inhibit_profiling_counters = false;/bool inhibit_profiling_counters = true;/g' libff/common/profiling.cpp \
+    && mkdir build && cd build && cmake .. && make && \
     make install && cd ../ && cp -R depends /usr/local/include/
 
 WORKDIR $HOME
@@ -31,6 +38,5 @@ WORKDIR $HOME
 
 # Install dependecies
 RUN apt-get install -y python python-pip && pip install cython
-RUN git clone git://github.com/grnet/hat_shuffle.git && cd hat_shuffle && \
-    git fetch && git checkout docker && ./build.sh
+RUN cd hat_shuffle && ./build.sh
 ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libprocps.so
