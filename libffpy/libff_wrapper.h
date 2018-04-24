@@ -1,9 +1,9 @@
 #include <vector>
 #include "gmp.h"
-#include "algebra/fields/bigint.hpp"
-#include "algebra/curves/public_params.hpp"
-#include "algebra/curves/bn128/bn128_pp.hpp"
-#include "algebra/scalar_multiplication/multiexp.hpp"
+#include "libff/algebra/fields/bigint.hpp"
+#include "libff/algebra/curves/public_params.hpp"
+#include "libff/algebra/curves/bn128/bn128_pp.hpp"
+#include "libff/algebra/scalar_multiplication/multiexp.hpp"
 
 using namespace libff;
 

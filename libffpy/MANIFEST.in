@@ -1,0 +1,5 @@
+include libffpy.pyx
+include libffpy.pxd
+include libff_wrapper.h
+include libff_wrapper.cpp
+recursive-include libff *
