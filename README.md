@@ -40,6 +40,7 @@ git submodule init && git submodule update
 
 ```bash
 cd libff
+git submodule init && git submodule update
 mkdir build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=../
 make && make install
 ```
