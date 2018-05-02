@@ -1,0 +1,3 @@
+[submodule "libffpy/libff"]
+	path = libffpy/libff
+	url = https://github.com/StefanosChaliasos/libff.git
