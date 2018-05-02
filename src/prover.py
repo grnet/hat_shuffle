@@ -1,5 +1,7 @@
 from libffpy import G1Py, G2Py
 from elgamal import enc
+from numpy import array
+import datetime
 
 
 def inverse_perm(s):
@@ -21,10 +23,44 @@ def step1b(sigma, randoms, g1_randoms,
     B = []
     A_hat = []
     inverted_sigma = inverse_perm(sigma)
+
+    #  g1_polys = array(map(lambda perm_i: g1_polys[perm_i], inverted_sigma))
+    #  g2_polys = array(map(lambda perm_i: g2_polys[perm_i], inverted_sigma))
+    #  g1_poly_hats = array(map(lambda perm_i: g1_poly_hats[perm_i], inverted_sigma))
+    #  g1_randoms = array(g1_randoms)
+    #  randoms_g2_rho = array(map(lambda random: random * g2rho, randoms))  #  extra step
+    #  randoms_g1rhohat = array(map(lambda random: random * g1rhohat, randoms))
+    #  A = list(g1_polys[:-1] + g1_randoms)
+    #  B = list(g2_polys[:-1] + randoms_g2_rho)
+    #  A_hat = list(g1_poly_hats[:-1] + randoms_g1rhohat)
+
+    start = datetime.datetime.now()
+
+    #  g1_polys = array(g1_polys)
+    #  A = list(g1_polys[inverted_sigma][:-1] + g1_randoms)
+
+    #  g2_polys = array(g2_polys)
+    #  randoms = array(randoms)
+    #  randoms_g2rho = randoms * g2rho
+    #  B = list(g2_polys[inverted_sigma][:-1] + randoms_g2rho)
+
+    #  g1_poly_hats = array(g1_poly_hats)
+    #  randoms_g1rhohat = randoms * g1rhohat
+    #  A_hat = list(g1_poly_hats[inverted_sigma][:-1] + randoms_g1rhohat)
+
+    #  start = datetime.datetime.now()
+    #  A = g1_polys[inverted_sigma][:-1] + g1_randoms
+    #  randoms_g2rho = randoms * g2rho
+    #  B = g2_polys[inverted_sigma][:-1] + randoms_g2rho
+    #  randoms_g1rhohat = randoms * g1rhohat
+    #  A_hat = g1_poly_hats[inverted_sigma][:-1] + randoms_g1rhohat
+
     for perm_i, g1_random, random in zip(inverted_sigma, g1_randoms, randoms):
         A.append(g1_polys[perm_i] + g1_random)
         B.append(g2_polys[perm_i] + random * g2rho)
         A_hat.append(g1_poly_hats[perm_i] + random * g1rhohat)
+
+    total = datetime.datetime.now() - start
 
     return A, B, A_hat
 
@@ -37,7 +73,6 @@ def get_infs():
 
 def step2(gk, A, B, g1_sum, g2_sum):
     inf1, inf2 = get_infs()
-    print("The end")
     A.append(g1_sum - sum(A, inf1))
     B.append(g2_sum - sum(B, inf2))
     return A, B

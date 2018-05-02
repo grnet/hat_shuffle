@@ -18,52 +18,13 @@ The module requires **Python 2.7**.
 Installing Dependencies
 =======================
 
-1. Install [libsnark](https://github.com/scipr-lab/libsnark) following
-the instructions on its GitHub page.
-	* Install libsnark on `/usr/` with
-	```
-	make install PREFIX=/usr
-	```
-	after compiling it.
-2. Install [libff](https://github.com/scipr-lab/libff) following
-the instructions on its GitHub page.
-	* After installing libff, inside the cloned repo copy
-	the third party libraries to the local includes.
-	```
-	cp -R depends /usr/local/include/
-	```
-
-   * Add to the libff library (before compiling it) the `-fPIC`
-  	flag on CMakeLists. Specifically on the
-  	`CMakeLists.txt` file add `-fPIC` to the existing flags on `CMAKE_CXX_FLAGS`
-  	and `CMAKE_EXE_LINKER_FLAGS`.
-
-
-    * In order to avoid libff outputting profiling info change the variables
-  	`inhibit_profiling_info` and `inhibit_profiling_counters` to `true` on
-  	`libff/common/profiling.cpp` before compiling the library.
-
-3. Install [ate-pairing](https://github.com/herumi/ate-pairing) following
-the instructions on its GitHub page (with SUPPORT_SNARK=1)
-4. Install package dependencies
-```
-    sudo apt-get install python python-pip
-```
-5. Install Cython
-```
-    pip install cython
+```bash
+sudo apt-get install build-essential git libboost-all-dev cmake libgmp3-dev libssl-dev libprocps4-dev pkg-config python-pip
+pip install libffpy
 ```
 
 ***So far we have tested these only on Ubuntu 16.04 LTS.***
 
-Installing libffpy
-==================
-
-- Change the path of ate-pairing lib in line 21 of libffpy/setup.py.
-
-```
-sudo ./build.sh
-```
 
 Usage
 =====
@@ -76,4 +37,10 @@ To run it:
 ```
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libprocps.so
 python demo.py
+```
+
+Or try:
+
+```bash
+./run.sh
 ```

@@ -1,3 +1,5 @@
+from cProfile import Profile
+from pstats import Stats
 import random
 import datetime
 import argparse
@@ -66,7 +68,16 @@ def demo(n, messages, batch=True):
 
     verify = verifier.verify_batched if batch else verifier.verify_non_batched
     perm_ok, sm_ok, cons_ok = verify(n, CRS, ciphertexts, pi_sh)
-    #  print("VERIFY: %s %s %s" % (perm_ok, sm_ok, cons_ok))
+    #  profiler = Profile()
+    #  profiler.runctx('perm_ok, sm_ok, cons_ok = verify(n, CRS, ciphertexts,\
+                    #  pi_sh)', {'verify': verify, 'n': n, 'CRS':
+                                  #  CRS, 'ciphertexts': ciphertexts, 'pi_sh':
+                              #  pi_sh}, {})
+    #  stats = Stats(profiler)
+    #  stats.sort_stats('cumulative')
+    #  stats.print_stats()
+    #  stats.print_callers()
+    print("VERIFY: %s %s %s" % (perm_ok, sm_ok, cons_ok))
 
     time_ver = datetime.datetime.now() - time_proof
     print("Verification: %s" % time_ver)
@@ -103,3 +114,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     messages = list(range(args.n))
     demo(len(messages), messages, batch=not args.nb)
+    #  profiler = Profile()
+    #  l = len(messages)
+    #  profiler.runctx('demo(l, messages)', {'l': l, 'messages': messages, 'demo': demo}, {})
+    #  stats = Stats(profiler)
+    #  stats.sort_stats('cumulative')
+    #  stats.print_stats()
