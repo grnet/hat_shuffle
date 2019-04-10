@@ -15,7 +15,8 @@ CRS_1SP_T = namedtuple(
         "pair_alpha"])
 
 CRS_SM_T = namedtuple(
-    "CRS_SM_T", ["g1_beta_polys", "g1_beta_rhos",
+    "CRS_SM_T", ["g1_beta_polys",
+                 "g1_beta_rhos", "g1_beta_rhoshat",
                  "g2_beta", "g2_betahat"])
 
 CRS_CON_T = namedtuple(
@@ -81,12 +82,14 @@ def mk_crs_sm(gk, Chi, polys, poly_hats):
     for poly, poly_hat in zip(polys, poly_hats):
         g1_beta_polys.append(
             (Chi.beta * poly + Chi.betahat * poly_hat) * gk.g1)
-    g1_beta_rhos = (Chi.beta * Chi.rho + Chi.betahat * Chi.rhohat) * gk.g1
+    g1_beta_rhos = (Chi.beta * Chi.rho) * gk.g1
+    g1_beta_rhoshat = (Chi.betahat * Chi.rhohat) * gk.g1
 
     # G2
     g2_beta = Chi.beta * gk.g2
     g2_betahat = Chi.betahat * gk.g2
-    return CRS_SM_T(g1_beta_polys, g1_beta_rhos,
+    return CRS_SM_T(g1_beta_polys,
+                    g1_beta_rhos, g1_beta_rhoshat,
                     g2_beta, g2_betahat)
 
 

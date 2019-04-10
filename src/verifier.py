@@ -3,7 +3,7 @@ import prover
 from functools import reduce
 
 
-def step1(pi_sh):
+def step_1(pi_sh):
     M_prime, g1_a, pi_1sp, pi_sm, pi_con = pi_sh
     g2_b, g1_c = pi_1sp
     g1_d = pi_sm
@@ -12,9 +12,9 @@ def step1(pi_sh):
         g2_b, g1_c, g1_d, g1_hat_a, g1_t, N
 
 
-def step2(gk, g1_a, g2_b, g1_hat_a, g1_sum, g2_sum, g1_hat_sum):
-    g1_a, g2_b = prover.step2(gk, g1_a, g2_b, g1_sum, g2_sum)
-    g1_hat_a = prover.step3(gk, g1_hat_a, g1_hat_sum)
+def step_2(gk, g1_a, g2_b, g1_hat_a, g1_sum, g2_sum, g1_hat_sum):
+    g1_a, g2_b = prover.step_2(gk, g1_a, g2_b, g1_sum, g2_sum)
+    g1_hat_a = prover.step_3(gk, g1_hat_a, g1_hat_sum)
     return g1_a, g2_b, g1_hat_a
 
 
@@ -22,7 +22,7 @@ def get_infT(gk):
     return GTElem.one(gk.G)
 
 
-def step3(gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
+def step_3(gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
     g1_alpha_poly_zero = crs_1sp.g1_alpha_poly_zero
     g2alpha = crs_1sp.g2alpha
     pair_alpha = crs_1sp.pair_alpha
@@ -35,7 +35,7 @@ def step3(gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
     return True
 
 
-def step3_batched(n, gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
+def step_3_batched(n, gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
     y1 = [gk.q.random() for x in range(n - 1)] + [1]
     infT = get_infT(gk)
     inf1, _ = prover.get_infs(gk)
@@ -52,7 +52,7 @@ def step3_batched(n, gk, g1_a, g2_b, g1_c, crs_1sp, g2_rho):
     return left == right
 
 
-def step4(gk, g1_d, g1_a, g1_hat_a, crs_sm):
+def step_4(gk, g1_d, g1_a, g1_hat_a, crs_sm):
     g2_beta = crs_sm.g2_beta
     g2_beta_hat = crs_sm.g2_betahat
 
@@ -64,7 +64,7 @@ def step4(gk, g1_d, g1_a, g1_hat_a, crs_sm):
     return True
 
 
-def step4_batched(n, gk, g1_d, g1_a, g1_hat_a, crs_sm):
+def step_4_batched(n, gk, g1_d, g1_a, g1_hat_a, crs_sm):
     y2 = [gk.q.random() for x in range(n - 1)] + [1]
     inf1, _ = prover.get_infs(gk)
 
@@ -77,7 +77,7 @@ def step4_batched(n, gk, g1_d, g1_a, g1_hat_a, crs_sm):
     return left == right
 
 
-def step5(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
+def step_5(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
     infT = get_infT(gk)
     g1_hat_rho = crs_con.g1rhohat
     g1_poly_hats = crs_con.g1_poly_hats
@@ -97,7 +97,7 @@ def mexp(scals, elems, inf):  # find optimized version in lib
                   inf)
 
 
-def step5_batched(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
+def step_5_batched(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
     infT = get_infT(gk)
     _, inf2 = prover.get_infs(gk)
     g1_hat_rho = crs_con.g1rhohat
@@ -116,16 +116,16 @@ def step5_batched(gk, pk, g1_t, crs_con, g1_a_hat, N, M, MP):
 def verify_batched(n, crs, M, pi_sh):
     print("Using Batching")
     M_prime, g1_a, pi_1sp, pi_sm, \
-        pi_con, g2_b, g1_c, g1_d, g1_hat_a, g1_t, N = step1(pi_sh)
+        pi_con, g2_b, g1_c, g1_d, g1_hat_a, g1_t, N = step_1(pi_sh)
 
-    g1_a, g2_b, g1_hat_a = step2(
+    g1_a, g2_b, g1_hat_a = step_2(
         crs.gk, g1_a, g2_b, g1_hat_a, crs.crs_1sp.g1_sum,
         crs.crs_1sp.g2_sum, crs.crs_1sp.g1_hat_sum)
 
-    perm_ok = step3_batched(
+    perm_ok = step_3_batched(
         n, crs.gk, g1_a, g2_b, g1_c, crs.crs_1sp, crs.g2rho)
-    sm_ok = step4_batched(n, crs.gk, g1_d, g1_a, g1_hat_a, crs.crs_sm)
-    cons_ok = step5_batched(
+    sm_ok = step_4_batched(n, crs.gk, g1_d, g1_a, g1_hat_a, crs.crs_sm)
+    cons_ok = step_5_batched(
         crs.gk, crs.pk, g1_t, crs.crs_con, g1_hat_a, N, M, M_prime)
 
     return perm_ok, sm_ok, cons_ok
@@ -135,14 +135,14 @@ def verify_non_batched(n, crs, M, pi_sh):
     print("Not Using Batching")
 
     M_prime, g1_a, pi_1sp, pi_sm, \
-        pi_con, g2_b, g1_c, g1_d, g1_hat_a, g1_t, N = step1(pi_sh)
+        pi_con, g2_b, g1_c, g1_d, g1_hat_a, g1_t, N = step_1(pi_sh)
 
-    g1_a, g2_b, g1_hat_a = step2(
+    g1_a, g2_b, g1_hat_a = step_2(
         crs.gk, g1_a, g2_b, g1_hat_a, crs.crs_1sp.g1_sum,
         crs.crs_1sp.g2_sum, crs.crs_1sp.g1_hat_sum)
 
-    perm_ok = step3(crs.gk, g1_a, g2_b, g1_c, crs.crs_1sp, crs.g2rho)
-    sm_ok = step4(crs.gk, g1_d, g1_a, g1_hat_a, crs.crs_sm)
-    cons_ok = step5(crs.gk, crs.pk, g1_t, crs.crs_con, g1_hat_a, N, M, M_prime)
+    perm_ok = step_3(crs.gk, g1_a, g2_b, g1_c, crs.crs_1sp, crs.g2rho)
+    sm_ok = step_4(crs.gk, g1_d, g1_a, g1_hat_a, crs.crs_sm)
+    cons_ok = step_5(crs.gk, crs.pk, g1_t, crs.crs_con, g1_hat_a, N, M, M_prime)
 
     return perm_ok, sm_ok, cons_ok
