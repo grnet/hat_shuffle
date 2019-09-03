@@ -1,6 +1,6 @@
 from libffpy import G1Py, G2Py
 from elgamal import enc
-from numpy import array
+#  from numpy import array
 import datetime
 
 
