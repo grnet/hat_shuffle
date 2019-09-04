@@ -88,9 +88,9 @@ def generate_pis(chi, n):
     q -- the order of the group, must be a Bn
     """
 
-    if chi <= n + 1:
-        raise ValueError("chi should be greater than n + 1, chi=%s n+1=%s"
-                         % (chi, n+1))
+    #  if chi <= BigNum(n + 1):
+        #  raise ValueError("chi should be greater than n + 1, chi=%s n+1=%s"
+                         #  % (chi, n+1))
     pis = []
 
     prod = BigNum(1)
