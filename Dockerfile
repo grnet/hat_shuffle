@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 
 ENV HOME /root
 
-# Install libsnark
 RUN apt-get update && apt-get install -y \
     build-essential cmake git libgmp3-dev libprocps4-dev python-markdown \
     libboost-all-dev libssl-dev pkg-config vim
@@ -20,18 +19,21 @@ RUN cd libffpy/libff && mkdir -p build && cd build && \
     cmake .. -DCMAKE_INSTALL_PREFIX=../ && make && make install
 WORKDIR $LIBFFPY
 
-RUN apt-get install -y python python-pip && pip install cython
+RUN apt-get install -y python3 python3-pip && pip3 install cython
 
-RUN python setup.py build_ext --inplace && python setup.py install
+RUN echo "" > libffpy/__init__.py
+
+RUN python3 setup.py build_ext --inplace && python3 setup.py install
 
 WORKDIR $HOME
 
-RUN git clone https://github.com/grnet/hat_shuffle.git
+RUN mkdir hat_shuffle
 
 WORKDIR hat_shuffle
 
-RUN git fetch && git checkout libffpy
+COPY src/ src
+COPY demo.py ./
 
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libprocps.so
 
-ENTRYPOINT ["python", "demo.py"]
+ENTRYPOINT ["python3", "demo.py"]
