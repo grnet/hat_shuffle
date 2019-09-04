@@ -1,4 +1,4 @@
-from libffpy import BigNum
+from libffpy.libffpy import BigNum
 
 def lagrangian(i, n, chi, q):
     """Evaluates Lagrange basis polynomial l_i at point x.

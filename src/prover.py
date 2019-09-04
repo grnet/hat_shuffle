@@ -1,5 +1,5 @@
-from libffpy import G1Py, G2Py
-from elgamal import enc
+from libffpy.libffpy import G1Py, G2Py
+from src.elgamal import enc
 #  from numpy import array
 import datetime
 

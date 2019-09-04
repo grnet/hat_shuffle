@@ -1,6 +1,6 @@
-from libffpy import LibffPy
+from libffpy.libffpy import LibffPy
 from collections import namedtuple
-from pisgen import generate_pis, generate_pi_hats
+from src.pisgen import generate_pis, generate_pi_hats
 
 
 gk_T = namedtuple("gk_T", ["G", "q", "g1", "g2", "gt", "e"])

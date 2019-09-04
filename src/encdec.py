@@ -1,4 +1,4 @@
-import elgamal
+import src.elgamal
 
 
 def encrypt(q, pk, m):

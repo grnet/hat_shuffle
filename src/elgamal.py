@@ -1,4 +1,4 @@
-from libffpy import LibffPy
+from libffpy.libffpy import LibffPy
 
 
 def gen_params_bp_g2(n):

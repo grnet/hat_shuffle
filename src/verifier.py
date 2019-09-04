@@ -1,5 +1,5 @@
-from libffpy import GTPy
-import prover
+from libffpy.libffpy import GTPy
+import src.prover
 from functools import reduce
 
 
