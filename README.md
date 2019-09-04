@@ -44,3 +44,11 @@ Or try:
 ```bash
 ./run.sh
 ```
+
+Run with docker
+===============
+
+```bash
+docker build -t hat_shuffle .
+docker run -it hat_shuffle 5
+```
